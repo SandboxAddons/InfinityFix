@@ -31,5 +31,5 @@ dependencies {
 }
 
 jar {
-//    archiveExtension = "sbx"
+    archiveExtension = "sbx"
 }
