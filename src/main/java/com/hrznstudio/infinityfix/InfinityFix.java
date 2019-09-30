@@ -13,7 +13,7 @@ public class InfinityFix implements Addon {
     @Override
     public void init(SandboxAPI api) {
         api.on(ItemEvent.GetArrowType.class,
-                ev -> ev.getArrow().isEmpty(),
+                ev -> ev.getArrow().isEmpty() && ev.getWeapon().getLevel(Enchantments.INFINITY) > 0,
                 ev -> ev.setArrow(ItemStack.of(Items.ARROW))
         );
         api.on(EnchantmentEvent.Compatible.class,
