@@ -1,0 +1,62 @@
+plugins {
+    id 'fabric-loom' version '0.2.5-SNAPSHOT'
+    id 'maven-publish'
+    id 'java-library'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+archivesBaseName = 'minecraft'
+version = 'none'
+group = 'com.hrznstudio'
+
+minecraft {
+    //need this to extract dependencies packaged via jar-in-jar in our dev workspace
+    extractJars = true
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net'
+    }
+    maven {
+        name = 'Horizon Maven'
+        url = 'https://cdn.hrzn.studio/maven'
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "com.hrznstudio.sandbox:sandbox-fabric:0.2.+"
+    implementation "com.hrznstudio.sandbox:sandbox-api:${project.api_version}"
+
+    runtime project(':')
+}
+
+//TODO remove when not working on sandbox itself
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 1, 'seconds'
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include "fabric.mod.json"
+        expand "version": project.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "fabric.mod.json"
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

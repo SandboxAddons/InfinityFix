@@ -1,0 +1,35 @@
+plugins {
+    id "java-library"
+    id "maven-publish"
+}
+
+group = "com.hrznstudio"
+archivesBaseName = "InfinityFix"
+version = project.addon_version
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net'
+    }
+    maven {
+        name 'Horizon Maven'
+        url 'https://cdn.hrzn.studio/maven'
+    }
+}
+
+dependencies {
+    compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+    implementation "com.hrznstudio.sandbox:sandbox-api:${project.api_version}"
+
+    runtime project(':Minecraft')
+    testCompile "junit:junit:4.12"
+}
+
+jar {
+//    archiveExtension = "sbx"
+}
