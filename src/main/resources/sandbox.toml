@@ -1,9 +1,9 @@
 modid="infinityfix" # required `[a-z0-9-_]{4,15}`
-version="0.1.0" # required Semver Enforced!
+version="0.2.0" # required Semver Enforced!
 title="Infinity Fix" # optional DEFAULT: modid
 description="""
 """  # optional DEFAULT: ""
-entrypoint="com.hrznstudio.infinityfix.InfinityFix" # required
+entrypoint="org.sandboxpowered.infinityfix.InfinityFix" # required
 authors = [ # required 1
     "Coded",
 ]

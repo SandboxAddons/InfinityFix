@@ -1,10 +1,9 @@
 plugins {
-    id "java-library"
-    id "maven-publish"
+    id "java"
 }
 
-group = "com.hrznstudio"
-archivesBaseName = "InfinityFix"
+group = "org.sandboxpowered"
+archivesBaseName = "infinity-fix"
 version = project.addon_version
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -12,24 +11,16 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
-    maven {
-        name = 'Fabric'
-        url = 'https://maven.fabricmc.net'
-    }
-    maven {
-        name 'Horizon Maven'
-        url 'https://cdn.hrzn.studio/maven'
-    }
+    maven { url 'https://dl.bintray.com/sandboxpowered/API/' }
+    maven { url 'https://maven.sandboxpowered.org/' }
 }
 
 dependencies {
-    compileOnly "com.google.code.findbugs:jsr305:3.0.2"
-    implementation "com.hrznstudio.sandbox:sandbox-api:${project.api_version}"
+    implementation platform("org.sandboxpowered.api:api:0.4.+")
 
-    runtime project(':Minecraft')
-    testCompile "junit:junit:4.12"
-}
+    implementation "org.sandboxpowered.api:base"
+    implementation "org.sandboxpowered.api:rendering"
+    implementation "org.sandboxpowered.api:resources"
 
-jar {
-    archiveExtension = "sbx"
+    implementation 'org.sandboxpowered:eventhandler:1.0.21'
 }
