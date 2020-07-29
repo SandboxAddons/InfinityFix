@@ -1,4 +1,4 @@
-modid="infinityfix" # required `[a-z0-9-_]{4,15}`
+id="infinityfix" # required `[a-z0-9-_]{4,15}`
 version="0.2.0" # required Semver Enforced!
 title="Infinity Fix" # optional DEFAULT: modid
 description="""
